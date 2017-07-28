@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#ff4081</color>
+    <color name="black_with_opacity">#be171717</color>
+    <color name="snackbar_text_color">#1c649a</color>
+    <color name="after_item">#e8e3e3</color>
+    <color name="white">#ffffff</color>
+    <color name="heart_before">#a8a8a8</color>
+    <color name="heart_after">#b73c3c</color>
+</resources>

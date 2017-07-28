@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@+id/NewLocation" android:title="ثبت کردن یک مرکز تفریحی " android:icon="@drawable/back_ic"></item>
+    <item android:id="@+id/ShowAll" android:title="نشان دادن تمام مراکز تفریحی" android:icon="@drawable/back_ic"></item>
+    <item android:id="@+id/NearToMe" android:title="نزدیک به من" android:icon="@drawable/back_ic"></item>
+    <item android:id="@+id/Catagory" android:title="دسته بندی ها" android:icon="@drawable/back_ic"></item>
+
+
+</menu>
