@@ -9,11 +9,13 @@ public class post {
     private String imageView;
     private String textView;
     private double value;
+    private double latitude;
+    private double longitude;
     private String mark;
     private String summery;
-    private boolean farvar=false;
-
-
+    private String seen;
+    private String daste;
+    private boolean farvar = false;
 
 
     public String getTextView() {
@@ -71,5 +73,37 @@ public class post {
 
     public void setFarvar(boolean farvar) {
         this.farvar = farvar;
+    }
+
+    public String getSeen() {
+        return seen;
+    }
+
+    public void setSeen(String seen) {
+        this.seen = seen;
+    }
+
+    public String getDaste() {
+        return daste;
+    }
+
+    public void setDaste(String daste) {
+        this.daste = daste;
+    }
+
+    public double getLatitude() {
+        return latitude;
+    }
+
+    public void setLatitude(double latitude) {
+        this.latitude = latitude;
+    }
+
+    public double getLongitude() {
+        return longitude;
+    }
+
+    public void setLongitude(double longitude) {
+        this.longitude = longitude;
     }
 }

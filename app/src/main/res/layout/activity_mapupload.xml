@@ -29,8 +29,19 @@
             android:layout_below="@+id/toolbar"
             android:name="com.google.android.gms.maps.SupportMapFragment" />
 
-
-
+    <Button
+        android:id="@+id/btn_back_upload"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/map"
+        android:layout_marginBottom="3dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:text="حله"
+        android:textColor="@color/after_item"
+        android:textSize="30sp"
+        android:theme="@style/btn_map"
+        android:visibility="invisible" />
 
 
 </RelativeLayout>

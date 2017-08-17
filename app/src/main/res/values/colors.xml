@@ -9,4 +9,9 @@
     <color name="white">#ffffff</color>
     <color name="heart_before">#a8a8a8</color>
     <color name="heart_after">#b73c3c</color>
+    <color name="buttoun">#009688</color>
+    <color name="btn_map_before">#c82e7d32</color>
+    <color name="btn_map_after">#e681c784</color>
+    <color name="red">#9a4e4e</color>
+    <color name="toolbar_color">#292843</color>
 </resources>

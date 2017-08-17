@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.example.hamid.learn;
+package com.example.hamid.learn.Fcm;
 
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -25,13 +25,21 @@ import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
-import com.example.hamid.learn.View.Main2Activity;
+import com.example.hamid.learn.R;
+import com.example.hamid.learn.View.MapActivity;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+
+import java.util.Map;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
     private static final String TAG = "MyFirebaseMsgService";
+    private final String destination="destination";
+    private final String destination_type="activity";
+    private final String destination_which="destination_which";
+
+
 
     /**
      * Called when message is received.
@@ -53,11 +61,23 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // TODO(developer): Handle FCM messages here.
         // Not getting messages here? See why this may be: https://goo.gl/39bRNJ
-        Log.d(TAG, "From: " + remoteMessage.getFrom());
+        Log.i(TAG, "From: " + remoteMessage.getFrom());
 
         // Check if message contains a data payload.
         if (remoteMessage.getData().size() > 0) {
-            Log.d(TAG, "Message data payload: " + remoteMessage.getData());
+            Map<String,String> data=remoteMessage.getData();
+           Log.i("FCM_Notification",""+"onMessageReceived");
+            switch (data.get(destination)){
+                case (destination_type):
+                    String activity=data.get(destination_which);
+                    Log.i(TAG,"test Firebase "+activity);
+                    Intent show=new Intent(this, MapActivity.class);
+                    show.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    sendNotification(remoteMessage.getNotification().getBody(),show);
+                    break;
+
+            }
+
 
             if (/* Check if data needs to be processed by long running job */ true) {
                 // For long-running tasks (10 seconds or more) use Firebase Job Dispatcher.
@@ -71,7 +91,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
         // Check if message contains a notification payload.
         if (remoteMessage.getNotification() != null) {
-            Log.d(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
+            Log.i(TAG, "Message Notification Body: " + remoteMessage.getNotification().getBody());
         }
 
         // Also if you intend on generating your own notifications as a result of a received FCM
@@ -86,7 +106,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         // [START dispatch_job]
 //        FirebaseJobDispatcher dispatcher = new FirebaseJobDispatcher(new GooglePlayDriver(this));
 //        Job myJob = dispatcher.newJobBuilder()
-////                .setService(Main2Activity.class)
+////                .setService(MapActivity.class)
 //                .setTag("my-job-tag")
 //                .build();
 //        dispatcher.schedule(myJob);
@@ -104,17 +124,18 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
      * Create and show a simple notification containing the received FCM message.
      *
      * @param messageBody FCM message body received.
+
      */
-    private void sendNotification(String messageBody) {
-        Intent intent = new Intent(this, Main2Activity.class);
+    private void sendNotification(String messageBody, Intent intent) {
+        Log.i("FCM_Notification",""+"sendNotification");
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
+        PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent,
                 PendingIntent.FLAG_ONE_SHOT);
 
         Uri defaultSoundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
         NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this)
-                .setSmallIcon(R.drawable.back_ic)
-                .setContentTitle("FCM Message")
+                .setSmallIcon(R.drawable.shop_48)
+                .setContentTitle("HARDROID")
                 .setContentText(messageBody)
                 .setAutoCancel(true)
                 .setSound(defaultSoundUri)
@@ -124,5 +145,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
         notificationManager.notify(0 /* ID of notification */, notificationBuilder.build());
+        handleIntent(intent);
     }
 }

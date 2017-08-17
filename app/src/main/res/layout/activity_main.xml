@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/main_drawer"
+    android:layout_gravity="left"
     >
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -18,14 +19,16 @@
 
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+           app:theme="@style/ThemeOverlay.AppCompat.Dark">
 
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/main_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#d7dcde"
+                android:background="#292843"
+                android:gravity="right"
                 app:layout_scrollFlags="scroll|enterAlways">
 
                 <LinearLayout
@@ -40,7 +43,7 @@
                         android:layout_width="32dp"
                         android:layout_height="32dp"
                         android:layout_marginRight="8dp"
-                        android:background="@drawable/shop_48" />
+                        android:background="@drawable/search_24" />
 
                 </LinearLayout>
 
@@ -51,9 +54,9 @@
                 android:id="@+id/tab_learn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="#d7dcde"
+                android:background="@color/toolbar_color"
                 app:tabIndicatorColor="#009688"
-                app:tabSelectedTextColor="#2a2929"
+                app:tabSelectedTextColor="#ffffff"
                 app:tabTextColor="#919090">
 
             </android.support.design.widget.TabLayout>
@@ -65,7 +68,7 @@
             android:id="@+id/viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#e1e3e4"
+            android:background="#eceff1"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         </android.support.v4.view.ViewPager>
@@ -76,18 +79,20 @@
             android:layout_height="wrap_content"
             android:layout_gravity="bottom|right"
             android:layout_margin="8dp"
-            android:src="@drawable/search_24"
+            android:src="@drawable/ic_add_black_24dp"
+            app:backgroundTint="#51516c"
             app:fabSize="normal" />
 
 
     </android.support.design.widget.CoordinatorLayout>
 
     <android.support.design.widget.NavigationView
+        android:id="@+id/mainnavigation"
         android:layout_width="280dp"
         android:layout_height="match_parent"
         android:layout_gravity="start"
-        app:menu="@menu/menu_item"
-        app:headerLayout="@layout/header_navigation">
+        app:headerLayout="@layout/header_navigation"
+        app:menu="@menu/menu_item">
 
     </android.support.design.widget.NavigationView>
 

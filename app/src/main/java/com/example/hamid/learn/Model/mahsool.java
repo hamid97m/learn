@@ -12,9 +12,21 @@ public class mahsool implements Serializable {
     @SerializedName("name")
     private String name;
 
+    @SerializedName("id")
+    private int id;
+
+//    @SerializedName("latitude")
+//    private Double latitude;
+//
+//    @SerializedName("longitude")
+//    private Double longitude;
+
 
     @SerializedName("mark")
     private String mark;
+
+    @SerializedName("seen")
+    private String seen;
 
     @SerializedName("sumerry_dis")
     private String summery_dis;
@@ -84,4 +96,36 @@ public class mahsool implements Serializable {
     public void setGheymat(double gheymat) {
         this.gheymat = gheymat;
     }
+
+    public String getSeen() {
+        return seen;
+    }
+
+    public void setSeen(String seen) {
+        this.seen = seen;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+//    public Double getLongitude() {
+//        return longitude;
+//    }
+//
+//    public void setLongitude(Double longitude) {
+//        this.longitude = longitude;
+//    }
+//
+//    public Double getLatitude() {
+//        return latitude;
+//    }
+//
+//    public void setLatitude(Double latitude) {
+//        this.latitude = latitude;
+//    }
 }

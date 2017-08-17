@@ -7,12 +7,19 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
-    
+
     <style name="My_Button" parent="Theme.AppCompat.Light">
-        <item name="colorControlHighlight">@color/colorPrimary</item>
-        <item name="colorButtonNormal">@color/after_item</item>
-
-
+        <item name="colorButtonNormal">@color/buttoun</item>
+        <item name="colorControlHighlight">@color/after_item</item>
     </style>
+
+    <style name="btn_map">
+        <item name="colorButtonNormal">@color/btn_map_before</item>
+        <item name="colorControlHighlight">@color/btn_map_after</item>
+    </style>
+
+    <style name="AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
