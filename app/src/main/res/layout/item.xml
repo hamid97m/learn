@@ -121,7 +121,7 @@
             android:orientation="vertical">
 
             <LinearLayout
-                android:id="@+id/heartclick"
+                android:id="@+id/img_favar"
                 android:layout_width="48dp"
                 android:layout_height="35dp"
                 android:layout_gravity="right"

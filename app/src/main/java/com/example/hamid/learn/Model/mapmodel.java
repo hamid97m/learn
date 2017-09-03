@@ -9,6 +9,7 @@ public class mapmodel {
     private double longitude;
     private String name;
     private String daste;
+    private int id;
 
 
     public double getLatitude() {
@@ -41,5 +42,13 @@ public class mapmodel {
 
     public void setDaste(String daste) {
         this.daste = daste;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

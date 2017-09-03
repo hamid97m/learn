@@ -21,9 +21,9 @@ import retrofit2.Response;
 
 public class SeenApi {
     public static List<post> finalpost=new ArrayList<>();
-    public void getmahsoolat(final Onmahsoolatrecive onmahsoolatrecive, String title_post, int page){
+    public void getmahsoolat(final Onmahsoolatrecive onmahsoolatrecive, String title_post, int page,String ostan){
         iSeenApi service= ApiClient.getClient().create(iSeenApi.class);
-        Call<PostRetrofitModel> call=service.insertUser(title_post,page*8);
+        Call<PostRetrofitModel> call=service.insertUser(title_post,page*8,ostan);
         call.enqueue(new retrofit2.Callback<PostRetrofitModel>() {
             @Override
             public void onResponse(Call<PostRetrofitModel> call, Response<PostRetrofitModel> response) {

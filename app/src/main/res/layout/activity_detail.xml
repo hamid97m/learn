@@ -54,7 +54,7 @@
             app:layout_collapseMode="pin">
 
             <Button
-                android:id="@+id/heartclick"
+                android:id="@+id/img_favar"
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:layout_gravity="right|center_vertical"

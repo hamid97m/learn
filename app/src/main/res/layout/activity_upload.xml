@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -91,32 +92,6 @@
                 android:padding="10dp" />
 
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp">
-
-                <android.support.v7.widget.SwitchCompat
-                    android:id="@+id/checktakhfif"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_centerInParent="true"
-                    android:padding="15dp"
-                    android:text="تخفیف دارد؟" />
-
-                <EditText
-                    android:id="@+id/edt_value"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/border"
-                    android:ems="10"
-                    android:gravity="center"
-                    android:hint="میانگین تخفیف داده شده"
-                    android:inputType="number"
-                    android:padding="10dp"
-                    android:visibility="invisible" />
-            </RelativeLayout>
-
             <EditText
                 android:id="@+id/edt_sumer"
                 android:layout_width="match_parent"
@@ -143,6 +118,39 @@
                 android:textColorLink="@color/buttoun" />
 
             <EditText
+                android:id="@+id/edt_phone"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="شماره تماس با شما(نزد ما محفوض است)"
+                android:inputType="phone"
+                android:padding="10dp"
+                android:textColorLink="@color/buttoun" />
+
+            <AutoCompleteTextView
+                android:id="@+id/autoCompleteTextView3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_below="@+id/textView"
+                android:layout_margin="10dp"
+                android:background="@drawable/border"
+                android:ems="10"
+                android:gravity="center"
+                android:hint="استان"
+                android:padding="10dp"
+                android:text=""
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/update">
+
+                <requestFocus />
+            </AutoCompleteTextView>
+
+            <EditText
                 android:id="@+id/edt_mark"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,7 +158,7 @@
                 android:background="@drawable/border"
                 android:ems="10"
                 android:gravity="center"
-                android:hint="برند یا نام تجاری مکان"
+                android:hint="آدرس دقیق"
                 android:inputType="textMultiLine"
                 android:padding="10dp" />
 
@@ -215,6 +223,63 @@
                 android:layout_marginRight="8dp"
                 android:layout_marginTop="10dp" />
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <android.support.constraint.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <android.support.v7.widget.SwitchCompat
+                        android:id="@+id/checktakhfif"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_margin="10dp"
+                        android:padding="15dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginLeft="8dp"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="8dp"
+                        app:layout_constraintRight_toLeftOf="@+id/textView3" />
+
+                    <TextView
+                        android:id="@+id/textView3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_margin="10dp"
+                        android:layout_marginBottom="8dp"
+                        android:layout_marginRight="8dp"
+                        android:layout_marginTop="8dp"
+                        android:text="تخفیفی دارد آیا ؟"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <EditText
+                    android:id="@+id/edt_value"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignBottom="@+id/checktakhfif"
+                    android:layout_margin="10dp"
+                    android:background="@drawable/border"
+                    android:ems="10"
+                    android:gravity="center"
+                    android:hint="میانگین تخفیف داده شده"
+                    android:inputType="number"
+                    android:padding="10dp"
+                    android:visibility="gone" />
+            </LinearLayout>
+
             <Button
                 android:id="@+id/send_btn"
                 android:layout_width="wrap_content"
@@ -222,6 +287,7 @@
                 android:layout_marginBottom="50dp"
                 android:layout_marginTop="10dp"
                 android:drawableRight="@android:drawable/ic_menu_send"
+                android:gravity="center"
                 android:paddingBottom="15dp"
                 android:paddingLeft="30dp"
                 android:paddingRight="30dp"

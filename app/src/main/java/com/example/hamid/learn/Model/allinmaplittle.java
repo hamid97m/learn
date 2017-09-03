@@ -19,6 +19,9 @@ public class allinmaplittle {
     @SerializedName("daste")
     private String daste;
 
+    @SerializedName("id")
+    private int id;
+
     public String getName() {
         return name;
     }
@@ -49,5 +52,13 @@ public class allinmaplittle {
 
     public void setDaste(String daste) {
         this.daste = daste;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

@@ -21,9 +21,9 @@ import retrofit2.Response;
 
 public class API {
     public static List<post> finalpost=new ArrayList<>();
-   public void getmahsoolat(final Onmahsoolatrecive onmahsoolatrecive, String title_post,int page){
+   public void getmahsoolat(final Onmahsoolatrecive onmahsoolatrecive, String title_post,int page,String ostan){
        APIService service= ApiClient.getClient().create(APIService.class);
-       Call<PostRetrofitModel> call=service.insertUser(title_post,page*8);
+       Call<PostRetrofitModel> call=service.insertUser(title_post,page*8,ostan);
        call.enqueue(new retrofit2.Callback<PostRetrofitModel>() {
            @Override
            public void onResponse(Call<PostRetrofitModel> call, Response<PostRetrofitModel> response) {
@@ -43,10 +43,6 @@ public class API {
                    newpost.setDaste(products.get(i).getDaste());
                    newpost.setId(products.get(i).getId());
 
-//                   if(products.get(i).getLatitude()!=null) {
-//                       newpost.setLatitude(products.get(i).getLatitude());
-//                       newpost.setLongitude(products.get(i).getLongitude());
-//                   }
 
                    finalpost.add(newpost);
                }
@@ -56,16 +52,11 @@ public class API {
 
                }
 
-
            }
 
            @Override
            public void onFailure(Call<PostRetrofitModel> call, Throwable t) {
-
-
-
            }
        });
    }
-
 }

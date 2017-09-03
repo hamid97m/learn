@@ -18,7 +18,9 @@ import com.example.hamid.learn.Api.PlusSeen;
 import com.example.hamid.learn.Model.post;
 import com.example.hamid.learn.R;
 import com.example.hamid.learn.View.DetailOfLocation;
+import com.example.hamid.learn.View.FirstActivity;
 import com.example.hamid.learn.View.MainActivity;
+import com.example.hamid.learn.View.SaleActivity;
 import com.squareup.picasso.Picasso;
 
 import java.util.ArrayList;
@@ -119,7 +121,7 @@ public class Addapter extends RecyclerView.Adapter<Addapter.viewholder> {
             like = (TextView) itemView.findViewById(R.id.like);
             gheymat = (TextView) itemView.findViewById(R.id.gheymat);
             linearLayout = (ConstraintLayout) itemView.findViewById(R.id.relativ);
-            heartclick = (LinearLayout) itemView.findViewById(R.id.heartclick);
+            heartclick = (LinearLayout) itemView.findViewById(R.id.img_favar);
             heart = (ImageView) itemView.findViewById(R.id.heart);
             //set font
             textView.setTypeface(MainActivity.b_typeface);
@@ -139,6 +141,7 @@ public class Addapter extends RecyclerView.Adapter<Addapter.viewholder> {
                     plusSeen.plus(posts.get(getLayoutPosition()).getId());
 
 
+                    if (FirstActivity.is_premium){
                     Snackbar.make(view, textView.getText() + "Coming soon !", 500).show();
                     Intent intent=new Intent(context, DetailOfLocation.class);
 //                    double value =posts.get(getLayoutPosition()).getValue();
@@ -152,10 +155,17 @@ public class Addapter extends RecyclerView.Adapter<Addapter.viewholder> {
                     String name=posts.get(getLayoutPosition()).getTextView();
                     String image =posts.get(getLayoutPosition()).getImageView() ;
                     int id=posts.get(getLayoutPosition()).getId();
+                    Boolean favar=posts.get(getLayoutPosition()).isFarvar();
                     intent.putExtra("image", image);
                     intent.putExtra("name",name);
                     intent.putExtra("id",id);
-                    context.startActivity(intent);
+                    intent.putExtra("favar",favar);
+                    intent.putExtra("addres",posts.get(getLayoutPosition()).getMark());
+                    context.startActivity(intent);}
+                    else{
+                        Intent intent=new Intent(context, SaleActivity.class);
+                        context.startActivity(intent);
+                    }
                 }
             });
             heartclick.setOnClickListener(new View.OnClickListener() {

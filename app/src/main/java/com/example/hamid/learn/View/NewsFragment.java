@@ -32,7 +32,7 @@ public class NewsFragment extends Fragment {
     private  View view;
     private int page=0;
     private  API api;
-    private Addapter addapter;
+    public static Addapter NewsAdapter;
     public  RotateLoading rotateLoading;
     private SwipeRefreshLayout swipeRefreshLayout;
 
@@ -41,10 +41,10 @@ public class NewsFragment extends Fragment {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        addapter=new Addapter(getActivity());
+        NewsAdapter=new Addapter(getActivity());
         api=new API();
         connect(0);
-        addapter.clear();
+        NewsAdapter.clear();
 
 
     }
@@ -71,7 +71,7 @@ public class NewsFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                addapter.clear();
+                NewsAdapter.clear();
                 rotateLoading.start();
                 page=0;
                 connect(page);
@@ -99,19 +99,19 @@ public class NewsFragment extends Fragment {
             @Override
             public void onrecive(List<post> posts) {
                 postss=posts;
-                addapter.addposts(posts);
+                NewsAdapter.addposts(posts);
                 rotateLoading.stop();
 
 
             }
-        },MainActivity.daste,page);
+        },MainActivity.daste,page,MainActivity.ostan);
 
     }
 
     public void setuprecycelview(){
         recyclerView=(RecyclerView)view.findViewById(R.id.recycleview_test);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL ));
-        recyclerView.setAdapter(addapter);
+        recyclerView.setAdapter(NewsAdapter);
         rotateLoading=(RotateLoading)view.findViewById(R.id.rotateloading);
         if (postss==null)rotateLoading.start();
 

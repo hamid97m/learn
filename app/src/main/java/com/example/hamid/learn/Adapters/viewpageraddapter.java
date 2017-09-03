@@ -7,6 +7,7 @@ import android.support.v4.app.FragmentPagerAdapter;
 import com.example.hamid.learn.View.LikeFragment;
 import com.example.hamid.learn.View.SeenFragment;
 import com.example.hamid.learn.View.NewsFragment;
+import com.example.hamid.learn.View.SpecialFragment;
 
 /**
  * Created by Hamid on 7/13/2017.
@@ -27,6 +28,8 @@ public class viewpageraddapter extends FragmentPagerAdapter {
                 return "پربازدیدترین ها";
             case 2:
                 return "محبوب ترین ها";
+            case 3:
+                return "ویژه ترین";
             default:return "";
 
 
@@ -43,8 +46,9 @@ public class viewpageraddapter extends FragmentPagerAdapter {
            break;
            case 2:fragment= LikeFragment.newInstance();
                break;
-           case 3:fragment= SeenFragment.newInstance();
-
+           case 3:fragment= SpecialFragment.newInstance();
+               break;
+//           case 4:fragment= SpecialFragment.newInstance();
        }
        return fragment;
 
@@ -52,6 +56,6 @@ public class viewpageraddapter extends FragmentPagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 }

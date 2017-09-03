@@ -15,8 +15,8 @@
         android:layout_marginEnd="16dp"
         android:layout_marginRight="12dp"
         android:layout_marginTop="0dp"
-        app:layout_constraintRight_toRightOf="@+id/heartclick"
-        app:layout_constraintTop_toBottomOf="@+id/heartclick" />
+        app:layout_constraintRight_toRightOf="@+id/img_favar"
+        app:layout_constraintTop_toBottomOf="@+id/img_favar" />
 
     <ImageView
         android:id="@+id/image_item"
@@ -37,14 +37,21 @@
 
     <TextView
         android:id="@+id/mark"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="4dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:ellipsize="end"
+        android:gravity="center_vertical|center"
+        android:maxLines="1"
+        android:textColor="#6b6969"
         android:textSize="14sp"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toLeftOf="@+id/img_favar"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="شهریار_خیابانطالاقانی_کوچا ابوذر_طبقه دوم" />
 
     <TextView
         android:id="@+id/textitem"
@@ -54,7 +61,7 @@
         android:layout_marginLeft="16dp"
         android:layout_marginRight="8dp"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="6dp"
+        android:layout_marginTop="16dp"
         android:ellipsize="end"
         android:gravity="center"
         android:maxLines="1"
@@ -63,7 +70,8 @@
         android:textStyle="bold"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/guideline2"
-        app:layout_constraintTop_toBottomOf="@+id/mark" />
+        app:layout_constraintTop_toBottomOf="@+id/mark"
+        app:layout_constraintHorizontal_bias="0.0" />
 
     <TextView
         android:id="@+id/summery"
@@ -75,8 +83,8 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:ellipsize="end"
-        android:gravity="center_horizontal"
         android:maxLines="2"
+        android:gravity="center_horizontal"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toLeftOf="@+id/guideline2"
         app:layout_constraintTop_toBottomOf="@+id/textitem"
@@ -149,7 +157,7 @@
         tools:layout_editor_absoluteY="0dp" />
 
     <LinearLayout
-        android:id="@+id/heartclick"
+        android:id="@+id/img_favar"
         android:layout_width="48dp"
         android:layout_height="35dp"
         android:layout_gravity="right"

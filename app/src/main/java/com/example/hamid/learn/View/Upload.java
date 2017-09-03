@@ -21,6 +21,9 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.CompoundButton;
 import android.widget.EditText;
@@ -66,11 +69,23 @@ public class Upload extends AppCompatActivity implements EasyPermissions.Permiss
     private  EditText edt_name;
     private  EditText edt_mark;
     private  EditText edt_sumery;
+    private  EditText edt_phone;
+    private  AutoCompleteTextView ostan;
     private SwitchCompat switchCompat;
     private  ImageView uploadimage;
     private  ScrollView mainScrollView;
     private RotateLoading rotateLoading;
     private Bitmap preview_bitmap;
+
+    private int special;
+    private int degreeofspecial;
+
+    private boolean checkostan=false;
+
+   private String[] fruits = {"آذربایجان شرقی", "آذربایجان غربی", "اردبیل", "اصفهان", "البرز", "ایلام", "بوشهر", "تهران"
+            , "چهارمحال و بختیاری", "خراسان جنوبی", "خراسان رضوی", "خراسان شمالی", "خوزستان", "زنجان", "سمنان", "سیستان و بلوچستان",
+            "فارس", "قزوین", "قم", "کردستان", "کرمان", "کرمانشاه", "کهگیلویه و بویراحمد", "گلستان", "گیلان", "لرستان", "مازندران", "مرکزی",
+           "هرمزگان", "همدان", "یزد"};
 
     public static LinearLayout ll_map;
     private   LinearLayout ll_image;
@@ -86,6 +101,20 @@ public class Upload extends AppCompatActivity implements EasyPermissions.Permiss
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_upload);
+
+
+        Bundle extras = getIntent().getExtras();
+        special= extras.getInt("special");
+        degreeofspecial= extras.getInt("degreeofspecial");
+
+
+        ArrayAdapter<String> adapterr = new ArrayAdapter<String>
+                (this, android.R.layout.select_dialog_item, fruits);
+        //Getting the instance of AutoCompleteTextView
+         ostan = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView3);
+        ostan.setThreshold(1);//will start working from first character
+        ostan.setAdapter(adapterr);//setting the adapter data into the AutoCompleteTextView
+        ostan.setTextColor(Color.BLACK);
 
 
         viewPager=(ViewPager)findViewById(R.id.viewPagerr);
@@ -121,12 +150,7 @@ viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
     }
 });
 
-
-
-
-
-
-        Button btn_map=(Button)findViewById(R.id.btn_map);
+       Button btn_map=(Button)findViewById(R.id.btn_map);
         btn_map.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -149,6 +173,7 @@ viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
         edt_name=(EditText)findViewById(R.id.edt_name);
         edt_mark=(EditText)findViewById(R.id.edt_mark);
         edt_sumery=(EditText)findViewById(R.id.edt_sumer);
+        edt_phone=(EditText)findViewById(R.id.edt_phone);
 
         switchCompat=(SwitchCompat)findViewById(R.id.checktakhfif) ;
 
@@ -157,6 +182,7 @@ viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
         edt_value.addTextChangedListener(new GenericTextWatcher(edt_value));
         edt_mark.addTextChangedListener(new GenericTextWatcher(edt_mark));
         edt_sumery.addTextChangedListener(new GenericTextWatcher(edt_sumery));
+        edt_phone.addTextChangedListener(new GenericTextWatcher(edt_phone));
 
 
         ll_map=(LinearLayout)findViewById(R.id.ll_map);
@@ -205,17 +231,48 @@ viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
         switchCompat.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                if (!isChecked){
-
+                   edt_value.setVisibility(View.GONE);
+                   edt_value.setText("0");
 
                }else{
                    edt_value.setText("");
-                   switchCompat.setVisibility(View.INVISIBLE);
                    edt_value.setVisibility(View.VISIBLE);
                }
             }
         });
 
+//________________________________________________________________________________________________
+        // سبز شدن کادر استان بعد از پر شدنش
+        ostan.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                ostan.setBackgroundResource(R.drawable.border_after);
+                ostan.setTextColor(ContextCompat.getColor(Upload.this,R.color.black_with_opacity));
+                ostan.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_done_black_24dp,0,0,0);
+            }
+        });
+        ostan.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if(ostan.getText().length()<1){
+                    ostan.setBackgroundResource(R.drawable.border);
+                    ostan.setTextColor(Color.BLACK);
+                    ostan.setCompoundDrawablesWithIntrinsicBounds(0,0,0,0);
+
+                }
+            }
+        });
+//__________________________________________________________________________________________________
 
     }
     @Override
@@ -324,64 +381,96 @@ viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
         if(
                 edt_name.getText().length()>=5&
                 edt_sumery.getText().length()>=5&
+                edt_phone.getText().length()>=8&
                 edt_mark.getText().length()>=3&
                 edt_dis.getText().length()>=10&
                 longitude!=0&
-                preview_bitmap!=null)
+                preview_bitmap!=null&
+                ostan.getText().length()>=1)
 
         {
-        rotateLoading=(RotateLoading)findViewById(R.id.rotateLoadingupload);
-        rotateLoading.start();
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(SERVER_PATH)
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
+            for(int i=0;i<fruits.length;i++){
+                if (ostan.getText().toString().equals(fruits[i])){
+                    checkostan=true;
+                }}
+            if (checkostan) {
+                checkostan = false;
 
-            String daste_title="";
-            switch (viewPager.getCurrentItem()){
-                case 0:daste_title="tarikhi";break;
-                case 1:daste_title="kharid";break;
-                case 2:daste_title="resturant";break;
-                case 3:daste_title="gardesh";break;
-                case 4:daste_title="cafee";break;
+
+                rotateLoading = (RotateLoading) findViewById(R.id.rotateLoadingupload);
+                rotateLoading.start();
+                Retrofit retrofit = new Retrofit.Builder()
+                        .baseUrl(SERVER_PATH)
+                        .addConverterFactory(GsonConverterFactory.create())
+                        .build();
+
+                String daste_title = "";
+                switch (viewPager.getCurrentItem()) {
+                    case 0:
+                        daste_title = "tarikhi";
+                        break;
+                    case 1:
+                        daste_title = "kharid";
+                        break;
+                    case 2:
+                        daste_title = "resturant";
+                        break;
+                    case 3:
+                        daste_title = "gardesh";
+                        break;
+                    case 4:
+                        daste_title = "cafee";
+                        break;
+                }
+
+
+                int value = Integer.parseInt(edt_value.getText().toString());
+
+                RequestBody discription = RequestBody.create(MediaType.parse("s"), edt_dis.getText().toString());
+                RequestBody name = RequestBody.create(MediaType.parse("s"), edt_name.getText().toString());
+                RequestBody sumerry = RequestBody.create(MediaType.parse("s"), edt_sumery.getText().toString());
+                RequestBody phone = RequestBody.create(MediaType.parse("s"), edt_phone.getText().toString());
+                RequestBody mark = RequestBody.create(MediaType.parse("s"), edt_mark.getText().toString());
+                RequestBody daste = RequestBody.create(MediaType.parse("s"), daste_title);
+                RequestBody ostan = RequestBody.create(MediaType.parse("s"), this.ostan.getText().toString());
+                HashMap<String, RequestBody> map = new HashMap<>();
+                map.put("discription", discription);
+                map.put("mainname", name);
+                map.put("mark", mark);
+                map.put("sumerry", sumerry);
+                map.put("phone", phone);
+                map.put("daste", daste);
+                map.put("ostan", ostan);
+
+                HashMap<String, Integer> mapm = new HashMap<>();
+                mapm.put("value", value);
+                mapm.put("special", special);
+                mapm.put("degreeofspecial", degreeofspecial);
+
+                HashMap<String, Double> location = new HashMap<>();
+                location.put("latitude", latitude);
+                location.put("longitude", longitude);
+
+
+                UploadImageInterface uploadImage = retrofit.create(UploadImageInterface.class);
+                Call<UploadObject> fileUpload = uploadImage.uploadFile(fileToUpload, filename, map, mapm, location);
+                fileUpload.enqueue(new Callback<UploadObject>() {
+                    @Override
+                    public void onResponse(Call<UploadObject> call, Response<UploadObject> response) {
+                        rotateLoading.stop();
+                        Toast.makeText(Upload.this, "با موفقیت انجام شد", Toast.LENGTH_LONG).show();
+                    }
+
+                    @Override
+                    public void onFailure(Call<UploadObject> call, Throwable t) {
+                        Log.d("sagbawsag", t.getMessage());
+                        rotateLoading.stop();
+                    }
+                });
+            }else{
+                Toast.makeText(Upload.this,"استان انتخاب شده در لیست موجود نیست",Toast.LENGTH_LONG).show();
+
             }
-
-
-            int value = Integer.parseInt(edt_value.getText().toString());
-        RequestBody discription= RequestBody.create(MediaType.parse("s"), edt_dis.getText().toString());
-        RequestBody name= RequestBody.create(MediaType.parse("s"), edt_name.getText().toString());
-        RequestBody sumerry= RequestBody.create(MediaType.parse("s"), edt_sumery.getText().toString());
-        RequestBody mark= RequestBody.create(MediaType.parse("s"), edt_mark.getText().toString());
-        RequestBody daste= RequestBody.create(MediaType.parse("s"), daste_title);
-        HashMap<String, RequestBody> map = new HashMap<>();
-        map.put("discription",discription );
-        map.put("mainname",name );
-        map.put("mark",mark );
-        map.put("sumerry",sumerry );
-        map.put("daste",daste );
-
-        HashMap<String, Integer> mapm = new HashMap<>();
-        mapm.put("value", value);
-
-        HashMap<String, Double> location = new HashMap<>();
-            location.put("latitude", latitude);
-            location.put("longitude", longitude);
-
-
-            UploadImageInterface uploadImage = retrofit.create(UploadImageInterface.class);
-        Call<UploadObject> fileUpload = uploadImage.uploadFile(fileToUpload, filename,map,mapm,location);
-        fileUpload.enqueue(new Callback<UploadObject>() {
-            @Override
-            public void onResponse(Call<UploadObject> call, Response<UploadObject> response) {
-                rotateLoading.stop();
-                Toast.makeText(Upload.this,"با موفقیت انجام شد",Toast.LENGTH_LONG).show();
-            }
-            @Override
-            public void onFailure(Call<UploadObject> call, Throwable t) {
-                Log.d("sagbawsag", t.getMessage());
-                rotateLoading.stop();
-            }
-        });
     }
         else if (longitude == 0) Toast.makeText(Upload.this, "لطفا آدرس مورد نظر را روی نقشه نشان دهید", Toast.LENGTH_SHORT).show();
         else  if(preview_bitmap==null)Toast.makeText(Upload.this, "لطفا عکس مورد نظر خودتونو انتخاب کنید", Toast.LENGTH_SHORT).show();
@@ -476,6 +565,14 @@ private class GenericTextWatcher implements TextWatcher{
 
 
                 }
+            case R.id.edt_phone:
+                if(edt_phone.getText().length()>=8){
+                    edt_phone.setBackgroundResource(R.drawable.border_after);
+                    edt_phone.setTextColor(ContextCompat.getColor(Upload.this,R.color.black_with_opacity));
+                    edt_phone.setCompoundDrawablesWithIntrinsicBounds(R.drawable.ic_done_black_24dp,0,0,0);
+
+
+                }
                 if(edt_sumery.getText().length()<5){
                     edt_sumery.setBackgroundResource(R.drawable.border);
                     edt_sumery.setTextColor(Color.BLACK);
@@ -497,8 +594,10 @@ private class GenericTextWatcher implements TextWatcher{
 
                 }
                 break;
+
         }
     }
 }
 
 }
+//TODO Get Phone Number From Useres And Orginal users

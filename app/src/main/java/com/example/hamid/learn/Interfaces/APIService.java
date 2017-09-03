@@ -28,6 +28,6 @@ public interface APIService {
     @FormUrlEncoded
     @POST("mahsoolat.php")
     public Call<PostRetrofitModel> insertUser(
-            @Field("daste") String name,@Field("limit") int lim);
+            @Field("daste") String name,@Field("limit") int lim,@Field("ostan") String ostan);
 }
 

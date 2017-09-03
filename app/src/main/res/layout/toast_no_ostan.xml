@@ -1,0 +1,17 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/saggg"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#e7047884"
+    android:orientation="horizontal"
+    android:padding="10dp">
+
+    <TextView
+        android:id="@+id/text"
+        android:layout_width="wrap_content"
+        android:layout_height="fill_parent"
+        android:padding="12dp"
+        android:textColor="@color/after_item"
+        android:textSize="18sp" />
+
+</LinearLayout>

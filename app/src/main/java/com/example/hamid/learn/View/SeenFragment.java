@@ -31,7 +31,7 @@ public class SeenFragment extends Fragment {
     private RecyclerView recyclerView;
     private  View view;
     private  SeenApi api;
-    private Addapter addapter;
+    public static Addapter SeenAdapter;
     private RotateLoading rotateLoading;
     private int page=0;
 
@@ -44,10 +44,10 @@ public class SeenFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.i("fragmmmmment",""+3);
         setRetainInstance(true);
-        addapter=new Addapter(getActivity());
+        SeenAdapter=new Addapter(getActivity());
         api= new SeenApi();
         connect(0);
-        addapter.clear();
+        SeenAdapter.clear();
 
     }
 
@@ -74,7 +74,7 @@ public class SeenFragment extends Fragment {
             @Override
             public void onRefresh() {
                 rotateLoading.start();
-                addapter.clear();
+                SeenAdapter.clear();
                 page=0;
                 connect(page);
                 swipeRefreshLayout.setRefreshing(false);
@@ -88,7 +88,7 @@ public class SeenFragment extends Fragment {
     private void setuprecycelview() {
         recyclerView=(RecyclerView)view.findViewById(R.id.recycleview_seen);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL ));
-        recyclerView.setAdapter(addapter);
+        recyclerView.setAdapter(SeenAdapter);
         rotateLoading=(RotateLoading)view.findViewById(R.id.rotateloadingseen);
         if (postss == null) rotateLoading.start();
 
@@ -107,12 +107,12 @@ public class SeenFragment extends Fragment {
             @Override
             public void onrecive(List<post> posts) {
                 postss=posts;
-                addapter.addposts(posts);
+                SeenAdapter.addposts(posts);
 
                 rotateLoading.stop();
 
             }
-        },MainActivity.daste,page);
+        },MainActivity.daste,page,MainActivity.ostan);
 
     }
 

@@ -37,6 +37,8 @@ public class SeeAllInMap {
                         mapmodel newpost=new mapmodel();
                         newpost.setName(products.get(i).getName());
                         newpost.setDaste(products.get(i).getDaste());
+                        newpost.setId(products.get(i).getId());
+
                         if(products.get(i).getLatitude()!=null) {
                         newpost.setLatitude(products.get(i).getLatitude());
                         newpost.setLongitude(products.get(i).getLongitude());

@@ -31,7 +31,7 @@ public class LikeFragment extends Fragment {
     private RecyclerView recyclerView;
     private View view;
     private LikeApi api;
-    private Addapter addapter;
+    public static Addapter Likeadapter;
     private RotateLoading rotateLoading;
     private int page = 0;
     private List<post> postss;
@@ -44,9 +44,9 @@ public class LikeFragment extends Fragment {
         super.onCreate(savedInstanceState);
         Log.i("fragmmmmment", "" + 3);
         setRetainInstance(true);
-        addapter = new Addapter(getActivity());
+        Likeadapter = new Addapter(getActivity());
         api = new LikeApi();
-        addapter.clear();
+        Likeadapter.clear();
         connect(0);
 
 
@@ -74,7 +74,7 @@ public class LikeFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                addapter.clear();
+                Likeadapter.clear();
                 page=0;
                 connect(page);
                 rotateLoading.start();
@@ -88,9 +88,9 @@ public class LikeFragment extends Fragment {
 
     private void setuprecycelview() {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycleview_like);
-        recyclerView = (RecyclerView) view.findViewById(R.id.recycleview_like);
+//        recyclerView = (RecyclerView) view.findViewById(R.id.recycleview_like);
         recyclerView.setLayoutManager(new StaggeredGridLayoutManager(1, StaggeredGridLayoutManager.VERTICAL));
-        recyclerView.setAdapter(addapter);
+        recyclerView.setAdapter(Likeadapter);
         rotateLoading = (RotateLoading) view.findViewById(R.id.rotateloadingseen);
         if (postss == null) rotateLoading.start();
 
@@ -110,12 +110,12 @@ public class LikeFragment extends Fragment {
             @Override
             public void onrecive(List<post> posts) {
                 postss = posts;
-                addapter.addposts(posts);
+                Likeadapter.addposts(posts);
                 rotateLoading.stop();
 
 
             }
-        }, MainActivity.daste, page);
+        }, MainActivity.daste, page,MainActivity.ostan);
 
     }
 

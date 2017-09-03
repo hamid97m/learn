@@ -7,6 +7,9 @@
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="com.farsitel.bazaar.permission.PAY_THROUGH_BAZAAR" />
 
     <application
         android:allowBackup="true"
@@ -16,13 +19,7 @@
         android:supportsRtl="false"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="android:supportsRtl">
-        <activity android:name=".View.MainActivity">
-            <!--<intent-filter>-->
-                <!--<action android:name="android.intent.action.MAIN" />-->
-
-                <!--<category android:name="android.intent.category.LAUNCHER" />-->
-            <!--</intent-filter>-->
-        </activity>
+        <activity android:name=".View.MainActivity" />
         <activity android:name=".View.MapActivity" />
 
         <meta-data
@@ -45,13 +42,39 @@
             android:resource="@color/colorAccent" />
 
         <activity android:name=".View.Upload" />
-        <activity android:name=".View.AllInMap">
+        <activity
+            android:name=".View.AllInMap"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="AIzaSyA0c74MVHDtxexwnkiaHRf9vXmba5XlBKM" />
         </activity>
-        <activity android:name=".View.Detail">
+        <activity
+            android:name=".View.DetailOfLocation"
+            android:screenOrientation="portrait">
+            <meta-data
+                android:name="com.google.android.geo.API_KEY"
+                android:value="AIzaSyA0c74MVHDtxexwnkiaHRf9vXmba5XlBKM" />
+        </activity>
+        <activity
+            android:name=".View.FirstActivity"
+            android:screenOrientation="portrait">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".View.Search"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.NearMe"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".View.SaleActivity"
+            android:screenOrientation="portrait">
+            >
             <!-- <intent-filter> -->
             <!-- <action android:name="android.intent.action.MAIN" /> -->
 
@@ -59,14 +82,8 @@
             <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
             <!-- </intent-filter> -->
         </activity>
-        <activity android:name=".View.DetailOfLocation" />
-        <activity android:name=".View.FirstActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
+        <activity android:name=".View.MyLocationActivity" />
+        <activity android:name=".View.WhichSpecialActivity"></activity>
     </application>
 
 </manifest>

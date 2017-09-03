@@ -27,7 +27,7 @@
                 android:id="@+id/main_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="#292843"
+                android:background="#34495e"
                 android:gravity="right"
                 app:layout_scrollFlags="scroll|enterAlways">
 
@@ -54,7 +54,7 @@
                 android:id="@+id/tab_learn"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:background="@color/toolbar_color"
+                android:background="#34495e"
                 app:tabIndicatorColor="#009688"
                 app:tabSelectedTextColor="#ffffff"
                 app:tabTextColor="#919090">
@@ -80,7 +80,7 @@
             android:layout_gravity="bottom|right"
             android:layout_margin="8dp"
             android:src="@drawable/ic_add_black_24dp"
-            app:backgroundTint="#51516c"
+            app:backgroundTint="#2c3e50"
             app:fabSize="normal" />
 
 

@@ -27,5 +27,5 @@ public interface iLikeApi {
     @FormUrlEncoded
     @POST("like.php")
     public Call<PostRetrofitModel> insertUser(
-            @Field("daste") String name, @Field("limit") int lim);
+            @Field("daste") String name, @Field("limit") int lim,@Field("ostan") String ostan);
 }

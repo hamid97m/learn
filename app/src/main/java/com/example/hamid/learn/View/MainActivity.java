@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
@@ -22,6 +23,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.hamid.learn.Adapters.viewpageraddapter;
 import com.example.hamid.learn.R;
@@ -43,6 +46,9 @@ public class MainActivity extends AppCompatActivity{
     private ConnectingBrodcas connectingBrodcas;
 
     public static String daste;
+    public static String ostan;
+
+    private TabLayout tabLayout;
 
 
     @Override
@@ -65,6 +71,7 @@ public class MainActivity extends AppCompatActivity{
 
         Bundle extras = getIntent().getExtras();
          daste= extras.getString("daste");
+         ostan= extras.getString("ostan");
 
         coordinatorLayout=(CoordinatorLayout)findViewById(R.id.Main_cordinator);
 
@@ -79,8 +86,17 @@ public class MainActivity extends AppCompatActivity{
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(MainActivity.this,Upload.class));
-                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                if (tabLayout.getSelectedTabPosition()!=3){
+                    Intent intent=new Intent(MainActivity.this,Upload.class);
+                    intent.putExtra("special",0);
+                    intent.putExtra("degreeofspecial",0);
+                    startActivity(intent);
+                    overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                }
+                else{
+                    startActivity(new Intent(MainActivity.this,WhichSpecialActivity.class));
+                    overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                }
             }
         });
 
@@ -88,7 +104,8 @@ public class MainActivity extends AppCompatActivity{
         comming_soon.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view,"فروش مستقیم در آپدیت بعدی , با تخفیف های عجیب !!!",5000).show();
+                startActivity(new Intent(MainActivity.this,Search.class));
+                overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
             }
         });
 
@@ -103,11 +120,25 @@ public class MainActivity extends AppCompatActivity{
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.NewLocation:
-                        startActivity(new Intent(MainActivity.this,Upload.class));
+                        Intent intent=new Intent(MainActivity.this,Upload.class);
+                        intent.putExtra("special",0);
+                        intent.putExtra("degreeofspecial",0);
+                        startActivity(intent);
                         overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                         break;
                     case R.id.ShowAll :
                         startActivity(new Intent(MainActivity.this,AllInMap.class));
+                        overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                        break;
+                    case R.id.NearToMe :
+                        startActivity(new Intent(MainActivity.this,NearMe.class));
+                        overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
+                        break;
+                    case R.id.Catagory :
+                       MainActivity.this.finish();
+                        break;
+                    case R.id.special :
+                        startActivity(new Intent(MainActivity.this,WhichSpecialActivity.class));
                         overridePendingTransition( R.anim.slide_in_up, R.anim.slide_out_up );
                         break;
                 }
@@ -145,12 +176,21 @@ public class MainActivity extends AppCompatActivity{
 
 
     private void Set_Up_Main_Viewpager(){
-        TabLayout tabLayout=(TabLayout)findViewById(R.id.tab_learn);
+         tabLayout=(TabLayout)findViewById(R.id.tab_learn);
         ViewPager viewPager=(ViewPager) findViewById(R.id.viewpager);
 //        viewPager.setOffscreenPageLimit(3);
         viewpageraddapter addapter=new viewpageraddapter(getSupportFragmentManager());
         viewPager.setAdapter(addapter);
         tabLayout.setupWithViewPager(viewPager);
+
+
+// ویژه ترین قرمز بشه
+                LinearLayout tabsContainer = (LinearLayout) tabLayout.getChildAt(0);
+                LinearLayout item = (LinearLayout) tabsContainer.getChildAt(3);
+                TextView tv = (TextView) item.getChildAt(1);
+                tv.setTextColor(tabLayout.getSelectedTabPosition() == 0 ? Color.parseColor("#FFFF7D7D") : Color.WHITE);
+
+
 
     }
 
@@ -179,47 +219,17 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
-
-//    // for exit in back and kill app
-//    boolean doubleBackToExitPressedOnce = false;
-//    @Override
-//    public void onBackPressed() {
-//        if (doubleBackToExitPressedOnce) {
-//            super.onBackPressed();
-//            android.os.Process.killProcess(android.os.Process.myPid());
-//            return;
-//        }
-//
-//        this.doubleBackToExitPressedOnce = true;
-////        Toast.makeText(this, "برای خروج لطفا دکمه بازگشت را دوباره فشار دهید", Toast.LENGTH_SHORT).show();
-//        LayoutInflater inflater = getLayoutInflater();
-//        View layout = inflater.inflate(R.layout.toast, (ViewGroup) findViewById(R.id.saggg));
-//
-//        ImageView image = (ImageView) layout.findViewById(R.id.image);
-//        image.setImageResource(R.drawable.ic_settings_backup_restore_black_24dp);
-//        TextView text = (TextView) layout.findViewById(R.id.text);
-//        text.setTypeface(l_typeface);
-//        text.setText("برای خروج لطفا دکمه بازگشت را دوباره فشار دهید");
-//
-//        Toast toast = new Toast(getApplicationContext());
-//        toast.setGravity(Gravity.CENTER_VERTICAL, 0, 0);
-//        toast.setDuration(Toast.LENGTH_LONG);
-//        toast.setView(layout);
-//        toast.show();
-//        new Handler().postDelayed(new Runnable() {
-//
-//            @Override
-//            public void run() {
-//                doubleBackToExitPressedOnce=false;
-//            }
-//        }, 2000);
-//    }
-
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        android.os.Process.killProcess(android.os.Process.myPid());
-        this.finish();
+//        android.os.Process.killProcess(android.os.Process.myPid());
+        if (  LikeFragment.Likeadapter!=null)  LikeFragment.Likeadapter.clear();
+        if (  SeenFragment.SeenAdapter!=null)  SeenFragment.SeenAdapter.clear();
+        if (  NewsFragment.NewsAdapter!=null)  NewsFragment.NewsAdapter.clear();
+        if (  SpecialFragment.Specialdapter!=null)  SpecialFragment.Specialdapter.clear();
+
+
+        MainActivity.this.finish();
     }
 
 }
